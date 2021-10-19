@@ -38,19 +38,23 @@ class Meating(models.Model):
         ("soon", "meating in future"),
     )
     title = models.CharField(max_length=120)
-    manager = models.ForeignKey("Accounts", on_delete=models.CASCADE, null=False, blank=False, default=1)
+    manager = models.ForeignKey(
+        "Accounts", on_delete=models.CASCADE, blank=False, default=1
+    )
     long_meaning_by_days = models.PositiveSmallIntegerField(
         default=0, validators=[MinValueValidator(0), MaxValueValidator(1)]
     )
     long_meaning_by_hours = models.PositiveSmallIntegerField(
         default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
-    s_time = models.DateTimeField(null=False, blank=False)
-    e_time = models.DateTimeField(null=True, blank=True)
+    s_time = models.DateTimeField(blank=False)
+    e_time = models.DateTimeField(blank=True, null=True)
     status = models.CharField(
         choices=meating_status, max_length=50, default=meating_status[2]
     )
-    room = models.ForeignKey(Meating_room, on_delete=models.CASCADE, null=False, blank=False, default=1)
+    room = models.ForeignKey(
+        Meating_room, on_delete=models.CASCADE, blank=False, default=1
+    )
 
     def save(self, *args, **kwargs):
 
