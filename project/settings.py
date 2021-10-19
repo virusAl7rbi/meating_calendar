@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # my applications
+    "django_crontab",
     "meating_calendar",
 ]
 
@@ -72,6 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
+CRONJOBS = [
+    ('*/1 * * * *', 'meating_calendar.cron.update_status_of_meating')
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
